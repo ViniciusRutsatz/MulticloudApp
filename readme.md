@@ -18,7 +18,7 @@ A aplicação se conecta a diferentes provedores de nuvem (AWS e Oracle) e envia
 Siga as etapas abaixo para executar a aplicação:
 
 1. Clone este repositório:
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone https://github.com/ViniciusRutsatz/MulticloudApp.git
    
 2. Navegue até o diretório do projeto:
    cd nome-do-repositorio
