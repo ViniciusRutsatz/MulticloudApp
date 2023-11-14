@@ -26,7 +26,7 @@ Siga as etapas abaixo para executar a aplicação:
 3. Instale as dependências:
    npm install
 
-4. Execute a aplicação:
+4. Execute a aplicação dentro da pasta main:
    node index.js
 
 ## Configuração
