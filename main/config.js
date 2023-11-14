@@ -3,20 +3,20 @@
 module.exports = {
   aws: {
     port: 22,
-    ip: '18.229.102.31',
+    ip: 'AQUI VAI O IP DA VM AWS',
     credentials: {
       username: 'ec2-user',
-      privateKeyPath: '../parkeys/vm_aws_tcc_vini.pem', // Caminho para a chave privada da AWS
+      privateKeyPath: '../caminho_da_privateKey', // Caminho para a chave privada da AWS
       passphrase: '', // Se sua chave tem uma passphrase
     },
     lastPing: Date.now(),
   },
   oracle: {
     port: 22,
-    ip: '168.138.228.28',
+    ip: 'AQUI VAI O IP DA VM ORACLE',
     credentials: {
       username: 'opc',
-      privateKeyPath: '../parkeys/ssh-key-2023-11-07.key', // Caminho para a chave privada do Oracle
+      privateKeyPath: '../caminho_da_privateKey', // Caminho para a chave privada do Oracle
       passphrase: '', // Se sua chave tem uma passphrase
     },
     lastPing: Date.now(),
