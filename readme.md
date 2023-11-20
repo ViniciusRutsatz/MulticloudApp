@@ -2,7 +2,7 @@
 
 Este repositório contém uma aplicação Node.js que exemplifica o funcionamento de um ambiente multicloud para o Trabalho de Conclusão de Curso de Sistemas de Informação da Universidade do Vale do Rio dos Sinos. 
 
-A aplicação se conecta a diferentes provedores de nuvem (AWS e Oracle) e envia pings para confirmar conexão com o servidor primário (AWS), em caso de queda de conexão forçada, a aplicação automaticamente se conectará no servidor secundário (Oracle)
+A aplicação se conecta a diferentes provedores de nuvem (AWS e Oracle) e envia pings para confirmar conexão com o servidor primário (Oracle), em caso de queda de conexão forçada, a aplicação automaticamente se conectará no servidor secundário (AWS)
 
 ## Estrutura do Projeto
 
