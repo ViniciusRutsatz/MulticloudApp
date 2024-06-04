@@ -1,23 +1,28 @@
-//index.js
-
 // Importa as bibliotecas necessárias
 const chalk = require('chalk');
 const { Client } = require('ssh2');
+const { performance } = require('perf_hooks');
 
 // Importa as configurações da aplicação
 const config = require('./config');
 
 // Inicia com o provedor primário (Oracle) no início
 let currentProvider = 'oracle';
+let switchStartTime = null; // Variável para armazenar o tempo de início da troca
 
 // Função para conectar a um provedor (Oracle ou AWS)
 function connect(provider) {
   const sshConfig = config[provider];
-
   const conn = new Client();
 
   // Evento 'ready' é acionado quando a conexão SSH é estabelecida com sucesso
   conn.on('ready', () => {
+    if (switchStartTime) {
+      const switchEndTime = performance.now();
+      const switchDuration = ((switchEndTime - switchStartTime) / 1000).toFixed(2);
+      console.log(chalk.green(`Troca para ${provider} concluída em ${switchDuration} segundos`));
+      switchStartTime = null; // Reseta o tempo de início da troca
+    }
     console.log(chalk.green(`Conectado com ${provider}`));
     ping(provider); // Inicia a verificação de ping
   });
@@ -29,11 +34,15 @@ function connect(provider) {
     if (provider === 'oracle') {
       currentProvider = 'aws';
       console.log(chalk.green('Tentando se conectar com o outro provedor'));
+      // Inicia o tempo de troca
+      switchStartTime = performance.now();
       // Tenta se reconectar após um atraso de 5 segundos
       setTimeout(() => connect('aws'), 5000);
     } else if (provider === 'aws') {
       currentProvider = 'oracle';
       console.log(chalk.green('Tentando se conectar com o outro provedor'));
+      // Inicia o tempo de troca
+      switchStartTime = performance.now();
       // Tenta se reconectar após um atraso de 5 segundos
       setTimeout(() => connect('oracle'), 5000);
     } else {
@@ -74,6 +83,8 @@ function ping(provider) {
         console.log(`Ping de ${provider} encerrado. Código: ${code}`);
         conn.end();
         console.log(chalk.green('Tentando se conectar com o outro provedor'));
+        // Inicia o tempo de troca
+        switchStartTime = performance.now();
         // Tenta se reconectar após um atraso de 5 segundos
         setTimeout(() => connect(currentProvider === 'oracle' ? 'aws' : 'oracle'), 5000);
       }).on('data', (data) => {
@@ -89,11 +100,15 @@ function ping(provider) {
     if (provider === 'oracle') {
       currentProvider = 'aws';
       console.log(chalk.green('Tentando se conectar com o outro provedor'));
+      // Inicia o tempo de troca
+      switchStartTime = performance.now();
       // Tenta se reconectar após um atraso de 5 segundos
       setTimeout(() => connect('aws'), 5000);
     } else if (provider === 'aws') {
       currentProvider = 'oracle';
       console.log(chalk.green('Tentando se conectar com o outro provedor'));
+      // Inicia o tempo de troca
+      switchStartTime = performance.now();
       // Tenta se reconectar após um atraso de 5 segundos
       setTimeout(() => connect('oracle'), 5000);
     } else {
